@@ -12,7 +12,7 @@ module.exports = async function auth(req, res, next) {
     const token = header.split(' ')[1];
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findById(payload.id);
+    const user = await User.findById(payload.userId);
     if (!user) return res.status(401).json({ message: 'Unauthorized' });
 
     req.user = user;
