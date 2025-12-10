@@ -63,7 +63,7 @@ exports.getNewReleases = async (req, res) => {
 
     const movies = await Movie.find({
       releaseDate: { $gte: thirtyDaysAgo },
-      isFeatured: true
+      isNewRelease: true
     }).sort({ releaseDate: -1 }).limit(10);
 
     // Return array directly instead of object
