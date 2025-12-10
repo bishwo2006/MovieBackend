@@ -8,7 +8,7 @@ const HallSchema = new mongoose.Schema({
     max: { type: Number, default: 500 },
   },
   totalSeats: { type: Number, default: 100 },
-  bookedSeats: { type: Number, default: 0 },
+  // Removed bookedSeats from here as booking is tracked per movie
   amenities: { type: [String], default: [] },
   isIMAX: { type: Boolean, default: false },
   isDolbyAtmos: { type: Boolean, default: false },

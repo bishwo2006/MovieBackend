@@ -188,4 +188,4 @@ const halls = [
 ];
 
 
-module.exports = halls;
+module.exports = movies;

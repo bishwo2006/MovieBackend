@@ -1,15 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { 
-  getHalls, 
-  getHallById, 
-  getHallsByMovie, 
-  getHallAvailability 
-} = require("../controllers/hallController.js");
+const hallController = require('../controllers/hallController');
 
-router.get("/", getHalls);
-router.get("/:id", getHallById);
-router.get("/movie/:movieId", getHallsByMovie);
-router.get("/:id/availability", getHallAvailability);
+router.get('/', hallController.getAllHalls);
+router.get('/:id', hallController.getHallById);
+router.get('/:id/availability', hallController.getHallAvailability);
 
 module.exports = router;

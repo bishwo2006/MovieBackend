@@ -1,4 +1,3 @@
-// models/Booking.js
 const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
@@ -8,10 +7,27 @@ const bookingSchema = new mongoose.Schema({
     required: true
   },
   hallId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Hall',
     required: true
   },
   userId: {
+    type: String,
+    required: true
+  },
+  userName: {
+    type: String,
+    required: true
+  },
+  userEmail: {
+    type: String,
+    required: true
+  },
+  movieTitle: {
+    type: String,
+    required: true
+  },
+  hallName: {
     type: String,
     required: true
   },
@@ -24,9 +40,13 @@ const bookingSchema = new mongoose.Schema({
     required: true
   },
   seats: {
-    type: Array,
+    type: [Number],
     required: true,
     min: 1
+  },
+  seatNumbers: {
+    type: [String],
+    required: true
   },
   totalPrice: {
     type: Number,
@@ -46,7 +66,26 @@ const bookingSchema = new mongoose.Schema({
     enum: ['esewa', 'khalti', 'paypal', 'cash'],
     required: true
   },
+  paymentStatus: {
+    type: String,
+    enum: ['paid', 'pending', 'failed'],
+    default: 'paid'
+  },
+  transactionId: {
+    type: String
+  }
+}, {
+  timestamps: true
 });
+
+// Compound index to ensure seat uniqueness per show
+bookingSchema.index({ 
+  hallId: 1, 
+  movieId: 1, 
+  showDate: 1, 
+  showTime: 1, 
+  seats: 1 
+}, { unique: true });
 
 const Booking = mongoose.model('Booking', bookingSchema);
 module.exports = Booking;
